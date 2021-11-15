@@ -2,17 +2,21 @@ name: Activity Box
 
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   build:
+    name: 🚀 Update activity box
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: JasonEtco/activity-box@master
+      - name: ⬇️ Checkout project
+        uses: actions/checkout@v2
+
+      - name: ⚡️ Update Recent Activity
+        uses: JasonEtco/activity-box@master
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_USERNAME: JasonEtco
-          GIST_ID: 68c3458672047ec25e61a8af730181c3
+          GH_USERNAME: borjapazr
+          GIST_ID: a55c854aa947b6a08a298f7694a0f01f

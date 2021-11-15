@@ -1,24 +1,32 @@
-name: Node CI
+name: CI
 
 on:
-  pull_request:
   push:
     branches:
-      - master
+      - main
+  pull_request:
 
 jobs:
   build:
+    name: 🚀 Build and Test
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 12
+      - name: ⬇️ Checkout project
+        uses: actions/checkout@v2
+
+      - name: 🟢 Use Node.js 12
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm ci
-      - run: npm test
-      - name: codecov
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: 👁‍🗨 Run tests
+        run: npm test
+      
+      - name: 🕵️‍♀️ Run codecov
         run: npx codecov
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
